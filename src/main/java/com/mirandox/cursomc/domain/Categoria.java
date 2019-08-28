@@ -13,13 +13,14 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Categoria implements Serializable{
+public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
 	
 	@JsonManagedReference
