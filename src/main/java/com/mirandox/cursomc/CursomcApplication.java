@@ -16,7 +16,7 @@ import com.mirandox.cursomc.domain.Produto;
 import com.mirandox.cursomc.domain.enums.TipoCliente;
 import com.mirandox.cursomc.repositories.CategoriaRepository;
 import com.mirandox.cursomc.repositories.CidadeRepository;
-import com.mirandox.cursomc.repositories.ClienteRepositoy;
+import com.mirandox.cursomc.repositories.ClienteRepository;
 import com.mirandox.cursomc.repositories.EnderecoRepository;
 import com.mirandox.cursomc.repositories.EstadoRepository;
 import com.mirandox.cursomc.repositories.ProdutoRepository;
@@ -37,7 +37,7 @@ public class CursomcApplication implements CommandLineRunner {
 	private CidadeRepository cidadeRepository;
 	
 	@Autowired
-	private ClienteRepositoy clienteRepository;
+	private ClienteRepository clienteRepository;
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;

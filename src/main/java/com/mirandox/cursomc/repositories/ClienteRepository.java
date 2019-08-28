@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.mirandox.cursomc.domain.Cliente;
 
 @Repository
-public interface ClienteRepositoy extends JpaRepository<Cliente, Integer>{
+public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
 
 }
