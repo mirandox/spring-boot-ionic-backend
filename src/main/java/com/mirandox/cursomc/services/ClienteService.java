@@ -13,12 +13,12 @@ import com.mirandox.cursomc.services.exceptions.ObjectNotFoundException;
 public class ClienteService {
 
 	@Autowired
-	private ClienteRepository categoriaRepository;
+	private ClienteRepository clienteRepository;
 	
 	public Cliente buscar(Integer id) {
-		Optional<Cliente> categoria = categoriaRepository.findById(id);
+		Optional<Cliente> cliente = clienteRepository.findById(id);
 		
-		return categoria.orElseThrow(() -> new ObjectNotFoundException(
+		return cliente.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
 }
