@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.mirandox.cursomc.domain.Categoria;
+import com.mirandox.cursomc.domain.Cliente;
 import com.mirandox.cursomc.dto.CategoriaDTO;
 import com.mirandox.cursomc.repositories.CategoriaRepository;
 import com.mirandox.cursomc.services.exceptions.DataIntegrityException;
@@ -37,8 +38,9 @@ public class CategoriaService {
 	}
 	
 	public Categoria update(Categoria categoria) {
-		find(categoria.getId());
-		return categoriaRepository.save(categoria);
+		Categoria categoriaFind = find(categoria.getId());
+		updateData(categoriaFind, categoria);
+		return categoriaRepository.save(categoriaFind);
 	}
 	
 	public void delete(Integer id) {
@@ -61,5 +63,9 @@ public class CategoriaService {
 	
 	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
 		return new Categoria(categoriaDTO.getId(),categoriaDTO.getNome());
+	}
+	
+	private void updateData(Categoria categoriaFind, Categoria categoria) {
+		categoriaFind.setNome(categoria.getNome());
 	}
 }
