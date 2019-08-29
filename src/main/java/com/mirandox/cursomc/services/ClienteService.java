@@ -25,7 +25,7 @@ import com.mirandox.cursomc.services.exceptions.ObjectNotFoundException;
 @Service
 public class ClienteService {
 	
-	private static String NOT_DELETE_CLIENTE = "Não é possível excluír porque há entidades relacionadas!";
+	private static String NOT_DELETE_CLIENTE = "Não é possível excluír porque há pedidos relacionados!";
 
 	@Autowired
 	private ClienteRepository clienteRepository;
