@@ -15,11 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mirandox.cursomc.domain.Cidade;
 import com.mirandox.cursomc.domain.Cliente;
 import com.mirandox.cursomc.domain.Endereco;
+import com.mirandox.cursomc.domain.enums.Perfil;
 import com.mirandox.cursomc.domain.enums.TipoCliente;
 import com.mirandox.cursomc.dto.ClienteDTO;
 import com.mirandox.cursomc.dto.ClienteNewDTO;
 import com.mirandox.cursomc.repositories.ClienteRepository;
 import com.mirandox.cursomc.repositories.EnderecoRepository;
+import com.mirandox.cursomc.security.UserSS;
+import com.mirandox.cursomc.services.exceptions.AuthorizationException;
 import com.mirandox.cursomc.services.exceptions.DataIntegrityException;
 import com.mirandox.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -38,8 +41,11 @@ public class ClienteService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public Cliente find(Integer id) {
-		Optional<Cliente> cliente = clienteRepository.findById(id);
+		UserSS user = UserService.authenticated();
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()))
+			throw new AuthorizationException("Acesso negado!");
 		
+		Optional<Cliente> cliente = clienteRepository.findById(id);
 		return cliente.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
