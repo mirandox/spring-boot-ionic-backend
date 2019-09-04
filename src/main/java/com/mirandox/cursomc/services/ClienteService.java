@@ -1,5 +1,6 @@
 package com.mirandox.cursomc.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mirandox.cursomc.domain.Cidade;
 import com.mirandox.cursomc.domain.Cliente;
@@ -39,6 +41,9 @@ public class ClienteService {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private S3Service s3Service;
 	
 	public Cliente find(Integer id) {
 		UserSS user = UserService.authenticated();
@@ -113,5 +118,9 @@ public class ClienteService {
 	private void updateData(Cliente clienteFind, Cliente cliente) {
 		clienteFind.setNome(cliente.getNome());
 		clienteFind.setEmail(cliente.getEmail());
+	}
+	
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		return s3Service.uploadFile(multipartFile);
 	}
 }
