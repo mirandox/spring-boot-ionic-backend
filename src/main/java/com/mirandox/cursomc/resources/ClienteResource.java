@@ -57,14 +57,14 @@ public class ClienteResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		clienteService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<ClienteDTO>> findAll() {
 		List<Cliente> listaClientes = clienteService.findAll();
@@ -73,7 +73,7 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listaDTO);
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<ClienteDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 

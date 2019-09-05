@@ -37,14 +37,6 @@ public class JWTUtil {
 		return false;
 	}
 
-	private Claims getClaims(String token) {
-		try {
-			return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
 	public String getUsername(String token) {
 		Claims claims = getClaims(token);
 
@@ -52,5 +44,14 @@ public class JWTUtil {
 			return claims.getSubject();
 
 		return null;
+	}
+	
+	private Claims getClaims(String token) {
+		token = token.substring(7);
+		try {
+			return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }
